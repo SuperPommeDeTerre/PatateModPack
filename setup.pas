@@ -64,6 +64,11 @@ begin
 				Log(ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)));}
 				idpAddFile(GetIniString('DownloadedFiles', lSelectedComponents[i], '', gIniFile), ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)));
 			end;
+	end
+	else if CurPageID = then
+	begin
+		{ Uncompress files }
+		// TODO
 	end;
 end;
 
