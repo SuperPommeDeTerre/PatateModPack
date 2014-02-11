@@ -9,22 +9,20 @@ AppVersion={#APP_VERSION}
 AppPublisher=SuperPommeDeTerre
 DefaultDirName={code:WoTInstallDirectory}
 DefaultGroupName={#APP_NAME}
-SetupIconFile=.\res\setup.ico
+SetupIconFile=res\setup.ico
 Compression=lzma2/max
 SolidCompression=true
 ShowLanguageDialog=yes
 LanguageDetectionMethod=locale
-OutputDir=.\bin
+OutputDir=bin
 OutputBaseFilename={#APP_NAME} {#APP_VERSION} (WoT {#WOT_VERSION})
-InfoBeforeFile=res\infobefore.txt
-InfoAfterFile=res\infoafter.txt
 WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp
 WizardImageFile=compiler:WizModernImage-IS.bmp
 
 
 [Languages]
-Name: "fr"; MessagesFile: "compiler:Languages\French.isl"
-Name: "en"; MessagesFile: "compiler:Default.isl"
+Name: "fr"; MessagesFile: "compiler:Languages\French.isl"; InfoBeforeFile: "res/infobefore-fr.rtf"; InfoAfterFile: "res/infoafter-fr.rtf"
+Name: "en"; MessagesFile: "compiler:Default.isl";          InfoBeforeFile: "res/infobefore-en.rtf"; InfoAfterFile: "res/infoafter-en.rtf"
 #include <idp.iss>
 ; Language file must be included AFTER idp.iss
 #include <idplang\default.iss>
@@ -106,6 +104,7 @@ Name: "minimap\hd";                Description: {cm:CompMinimapHD};          Typ
 Name: "minimap\tanksview";         Description: {cm:CompMinimapTanksView};   Types: full
 
 [Files]
+Source: "res\files.ini"; DestDir: "{tmp}"
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: xvm
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\clock
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\vtechtree

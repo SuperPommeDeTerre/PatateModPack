@@ -1,41 +1,53 @@
-function InitializeSetup(): Boolean;
+var
+	gIniFile: String;
+
+
+function Count(What, Where: String): Integer;
 begin
-	Result := true;
+	Result := 0;
+	if Length(What) = 0 then
+		exit;
+	while Pos(What,Where)>0 do
+	begin
+		Where := Copy(Where, Pos(What, Where) + Length(What), Length(Where));
+		Result := Result + 1;
+	end;
+end;
+
+{ Split text to array }
+procedure Explode(var ADest: TArrayOfString; aText, aSeparator: String);
+var
+	tmp: Integer;
+begin
+	if aSeparator = '' then
+		exit;
+	SetArrayLength(ADest, Count(aSeparator, aText) + 1)
+	tmp := 0;
+	repeat
+		if Pos(aSeparator,aText)>0 then
+		begin
+			ADest[tmp] := Copy(aText, 1, Pos(aSeparator, aText) - 1);
+			aText := Copy(aText, Pos(aSeparator, aText) + Length(aSeparator), Length(aText));
+			tmp := tmp + 1;
+		end else
+		begin
+			ADest[tmp] := aText;
+			aText := '';
+		end;
+	until Length(aText)=0;
 end;
 
 procedure InitializeWizard();
 begin
+	ExtractTemporaryFile('files.ini');
+	gIniFile := ExpandConstant('{tmp}\files.ini');
 	idpDownloadAfter(wpReady);
 end;
 
-procedure DeinitializeSetup();
-begin
-end;
-
-procedure CurStepChanged(CurStep: TSetupStep);
-begin
-end;
-
-procedure CurInstallProgressChanged(CurProgress, MaxProgress: Integer);
-begin
-end;
-
-function NextButtonClick(CurPageID: Integer): Boolean;
-begin
-	Result := true;
-end;
-
-function BackButtonClick(CurPageID: Integer): Boolean;
-begin
-	Result := true;
-end;
-
-function ShouldSkipPage(PageID: Integer): Boolean;
-begin
-	Result := false;
-end;
-
 procedure CurPageChanged(CurPageID: Integer);
+var
+	lSelectedComponents: TArrayOfString;
+	i: Integer;
 begin
 	if CurPageID = wpReady then
 	begin
@@ -43,30 +55,21 @@ begin
 		// need to clear file list to ensure that only needed files are added.
 		idpClearFiles;
 
-		if IsComponentSelected('xvm\clanicons\eu') then
-			idpAddFile('http://dl1.modxvm.com/clanicons/clanicons-full-eu-20140102.zip', ExpandConstant('{app}\clanicons.zip'));
-		if IsComponentSelected('xvm\clanicons\ru') then
-			idpAddFile('http://dl1.modxvm.com/clanicons/clanicons-full-ru-20140102.zip', ExpandConstant('{app}\clanicons.zip'));
-		if IsComponentSelected('xvm\clanicons\kr') then
-			idpAddFile('http://dl1.modxvm.com/clanicons/clanicons-full-kr-20140102.zip', ExpandConstant('{app}\clanicons.zip'));
-		if IsComponentSelected('xvm\clanicons\na') then
-			idpAddFile('http://dl1.modxvm.com/clanicons/clanicons-full-na-20140102.zip', ExpandConstant('{app}\clanicons.zip'));
-		if IsComponentSelected('xvm\clanicons\sg') then
-			idpAddFile('http://dl1.modxvm.com/clanicons/clanicons-full-sg-20140102.zip', ExpandConstant('{app}\clanicons.zip'));
+		Explode(lSelectedComponents, WizardSelectedComponents(false), ',');
+		for i := 0 to GetArrayLength(lSelectedComponents) - 1 do
+			if IniKeyExists('DownloadedFiles', lSelectedComponents[i], gIniFile) then
+			begin
+				{Log(lSelectedComponents[i]);
+				Log(GetIniString('DownloadedFiles', lSelectedComponents[i], '', gIniFile));
+				Log(ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)));}
+				idpAddFile(GetIniString('DownloadedFiles', lSelectedComponents[i], '', gIniFile), ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)));
+			end;
 	end;
 end;
 
 function NeedRestart(): Boolean;
 begin
 	Result := false;
-end;
-
-procedure CancelButtonClick(CurPageID: Integer; var Cancel, Confirm: Boolean);
-begin
-end;
-
-procedure InitializeUninstallProgressForm();
-begin
 end;
 
 { Fonction d'extraction du chemin de WoT }
