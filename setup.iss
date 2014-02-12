@@ -86,11 +86,11 @@ Name: custom; Description: {cm:InstallationTypeCustom}; Flags: iscustom
 [Components]
 Name: "xvm";                       Description: {cm:CompXVM};                Types: full
 Name: "xvm\clanicons";             Description: {cm:CompXVMClanIcons};       Types: full
-Name: "xvm\clanicons\eu";          Description: {cm:CompXVMClanIconsEU};     Types: full;        Flags: exclusive; ExtraDiskSpaceRequired: 140430000
-Name: "xvm\clanicons\kr";          Description: {cm:CompXVMClanIconsKR};                         Flags: exclusive; ExtraDiskSpaceRequired: 5210000
-Name: "xvm\clanicons\na";          Description: {cm:CompXVMClanIconsNA};                         Flags: exclusive; ExtraDiskSpaceRequired: 48120000
-Name: "xvm\clanicons\sg";          Description: {cm:CompXVMClanIconsSG};                         Flags: exclusive; ExtraDiskSpaceRequired: 9720000
-Name: "xvm\clanicons\ru";          Description: {cm:CompXVMClanIconsRU};                         Flags: exclusive; ExtraDiskSpaceRequired: 437930000
+Name: "xvm\clanicons\eu";          Description: {cm:CompXVMClanIconsEU};     Types: full;        Flags: exclusive; ExtraDiskSpaceRequired: 147249635
+Name: "xvm\clanicons\kr";          Description: {cm:CompXVMClanIconsKR};                         Flags: exclusive; ExtraDiskSpaceRequired: 5461290
+Name: "xvm\clanicons\na";          Description: {cm:CompXVMClanIconsNA};                         Flags: exclusive; ExtraDiskSpaceRequired: 50452481
+Name: "xvm\clanicons\sg";          Description: {cm:CompXVMClanIconsSG};                         Flags: exclusive; ExtraDiskSpaceRequired: 10191484
+Name: "xvm\clanicons\ru";          Description: {cm:CompXVMClanIconsRU};                         Flags: exclusive; ExtraDiskSpaceRequired: 459201364
 Name: "hangar";                    Description: {cm:CompHangar};             Types: full custom; Flags: fixed
 Name: "hangar\clock";              Description: {cm:CompClock};              Types: full
 Name: "hangar\vtechtree";          Description: {cm:CompVertTechTree};       Types: full
@@ -109,7 +109,6 @@ Name: "minimap\tanksview";         Description: {cm:CompMinimapTanksView};   Typ
 [Files]
 Source: "res\files.ini"; DestDir: "{tmp}"
 Source: "res\7za.exe"; DestDir: "{tmp}"
-Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: xvm
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\clock
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\vtechtree
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\carousel
