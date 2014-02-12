@@ -80,13 +80,21 @@ en.CompMinimapHD=HD Minimap
 fr.CompMinimapHD=Minimap HD
 en.CompMinimapTanksView=Minimap Tanks View
 fr.CompMinimapTanksView=Affichage des chars
+en.CompAudio=Audio
+fr.CompAudio=Audio
+en.CompAudioGFEngines=Gnomefather's Engines
+fr.CompAudioGFEngines=Sons des moteurs Gnomefather
+en.CompAudioGFGuns=Historical Realism Gun sound mod 1.8621
+fr.CompAudioGFGuns=Sons des canons Gnomefather
+en.CompGFX=Graphic improvements
+fr.CompGFX=Améliorations graphiques
 
 [Types]
 Name: full; Description: {cm:InstallationTypeFull}
 Name: custom; Description: {cm:InstallationTypeCustom}; Flags: iscustom
 
 [Components]
-Name: "xvm";                       Description: {cm:CompXVM};                Types: full
+Name: "xvm";                       Description: {cm:CompXVM};                Types: full;                          ExtraDiskSpaceRequired: 7433112
 Name: "xvm\clanicons";             Description: {cm:CompXVMClanIcons};       Types: full
 Name: "xvm\clanicons\eu";          Description: {cm:CompXVMClanIconsEU};     Types: full;        Flags: exclusive; ExtraDiskSpaceRequired: 147249635
 Name: "xvm\clanicons\kr";          Description: {cm:CompXVMClanIconsKR};                         Flags: exclusive; ExtraDiskSpaceRequired: 5461290
@@ -95,9 +103,9 @@ Name: "xvm\clanicons\sg";          Description: {cm:CompXVMClanIconsSG};        
 Name: "xvm\clanicons\ru";          Description: {cm:CompXVMClanIconsRU};                         Flags: exclusive; ExtraDiskSpaceRequired: 459201364
 Name: "hangar";                    Description: {cm:CompHangar};             Types: full custom; Flags: fixed
 Name: "hangar\clock";              Description: {cm:CompClock};              Types: full
-Name: "hangar\vtechtree";          Description: {cm:CompVertTechTree};       Types: full
-Name: "hangar\autotelescope";      Description: {cm:CompAutoTelescope};      Types: full
-Name: "hangar\carousel";           Description: {cm:CompCarousel};           Types: full
+Name: "hangar\vtechtree";          Description: {cm:CompVertTechTree};       Types: full;                          ExtraDiskSpaceRequired: 556976
+Name: "hangar\autotelescope";      Description: {cm:CompAutoTelescope};      Types: full;                          ExtraDiskSpaceRequired: 87
+Name: "hangar\carousel";           Description: {cm:CompCarousel};           Types: full;                          ExtraDiskSpaceRequired: 379931
 Name: "hangar\carousel\carousel2"; Description: {cm:CompCarousel2Row};       Types: full;        Flags: exclusive
 Name: "hangar\carousel\carousel3"; Description: {cm:CompCarousel3Row};                           Flags: exclusive
 Name: "hangar\skins";              Description: {cm:CompHangarSkins};        Types: full
@@ -108,14 +116,15 @@ Name: "hangar\skins\carousel";     Description: {cm:CompHangarSkinCarousel};    
 Name: "minimap";                   Description: {cm:CompMinimap};            Types: full custom; Flags: fixed
 Name: "minimap\hd";                Description: {cm:CompMinimapHD};          Types: full;                          ExtraDiskSpaceRequired: 25064311
 Name: "minimap\tanksview";         Description: {cm:CompMinimapTanksView};   Types: full
+Name: "audio";                     Description: {cm:CompAudio};              Types: full custom; Flags: fixed
+Name: "audio\gfengines";           Description: {cm:CompAudioGFEngines};     Types: full
+Name: "audio\gfguns";              Description: {cm:CompAudioGFGuns};        Types: full
+Name: "gfx";                       Description: {cm:CompGFX};                Types: full custom; Flags: fixed
 
 [Files]
 Source: "res\files.ini"; DestDir: "{tmp}"
 Source: "res\7za.exe"; DestDir: "{tmp}"
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\clock
-Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\carousel
-Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\carousel\carousel2
-Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\carousel\carousel3
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\skins\tech
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\skins\desert
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\skins\livesky
