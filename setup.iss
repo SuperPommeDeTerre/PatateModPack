@@ -56,6 +56,8 @@ en.CompClock=Hangar clock
 fr.CompClock=Horloge dans le hangar
 en.CompVertTechTree=Vertical Tech Tree
 fr.CompVertTechTree=Arbre de recherche vertical
+en.CompAutoTelescope=Autotelescope (Auto equipment (un)mount)
+fr.CompAutoTelescope=Autotelescope (Montage/démontage auto. équipements)
 en.CompHangarSkins=Skins
 fr.CompHangarSkins=Skins
 en.CompHangarSkinDesert=Desert Camp
@@ -94,6 +96,7 @@ Name: "xvm\clanicons\ru";          Description: {cm:CompXVMClanIconsRU};        
 Name: "hangar";                    Description: {cm:CompHangar};             Types: full custom; Flags: fixed
 Name: "hangar\clock";              Description: {cm:CompClock};              Types: full
 Name: "hangar\vtechtree";          Description: {cm:CompVertTechTree};       Types: full
+Name: "hangar\autotelescope";      Description: {cm:CompAutoTelescope};      Types: full
 Name: "hangar\carousel";           Description: {cm:CompCarousel};           Types: full
 Name: "hangar\carousel\carousel2"; Description: {cm:CompCarousel2Row};       Types: full;        Flags: exclusive
 Name: "hangar\carousel\carousel3"; Description: {cm:CompCarousel3Row};                           Flags: exclusive
@@ -110,7 +113,6 @@ Name: "minimap\tanksview";         Description: {cm:CompMinimapTanksView};   Typ
 Source: "res\files.ini"; DestDir: "{tmp}"
 Source: "res\7za.exe"; DestDir: "{tmp}"
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\clock
-Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\vtechtree
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\carousel
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\carousel\carousel2
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\carousel\carousel3
