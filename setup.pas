@@ -83,8 +83,8 @@ begin
 			begin
 				Log('Extracting file [' + ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)) + '] to [' + ExpandConstant('{app}') + ']...');
 				Log('7-zip: ' + gZzipExe);
-				Log('args: x -o"' + ExpandConstant('{app}') + '" "' + ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)) + '"');
-				Exec(gZzipExe, 'x -o"' + ExpandConstant('{app}') + '" "' + ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)) + '"', ExpandConstant('{tmp}'), SW_HIDE, ewNoWait, ResultCode);
+				Log('args: x -y -o"' + ExpandConstant('{app}') + '" "' + ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)) + '"');
+				Exec(gZzipExe, 'x -y -o"' + ExpandConstant('{app}') + '" "' + ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)) + '"', ExpandConstant('{tmp}'), SW_HIDE, ewNoWait, ResultCode);
 			end;
 		if IsWin64 then
 		begin
