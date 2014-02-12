@@ -7,10 +7,14 @@ AppId={{C1BB1974-7612-4A21-9491-1A27B1EDD070}
 AppName={#APP_NAME}
 AppVersion={#APP_VERSION}
 AppPublisher=SuperPommeDeTerre
+AppPublisherURL=http://wot.pixbuf.net/
+AppUpdatesURL=http://wot.pixbuf.net/
+AppSupportURL=http://wot.pixbuf.net/
 DefaultDirName={code:WoTInstallDirectory}
 DefaultGroupName={#APP_NAME}
 SetupIconFile=res\setup.ico
-Compression=lzma2/max
+;Compression=lzma2/max
+Compression=lzma/fast
 SolidCompression=true
 ShowLanguageDialog=yes
 LanguageDetectionMethod=locale
@@ -18,7 +22,6 @@ OutputDir=bin
 OutputBaseFilename={#APP_NAME} {#APP_VERSION} (WoT {#WOT_VERSION})
 WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp
 WizardImageFile=compiler:WizModernImage-IS.bmp
-
 
 [Languages]
 Name: "fr"; MessagesFile: "compiler:Languages\French.isl"; InfoBeforeFile: "res/infobefore-fr.rtf"; InfoAfterFile: "res/infoafter-fr.rtf"
@@ -100,11 +103,12 @@ Name: "hangar\skins\desert";       Description: {cm:CompHangarSkinDesert};      
 Name: "hangar\skins\livesky";      Description: {cm:CompHangarSkinLiveSky};                      Flags: exclusive
 Name: "hangar\skins\carousel";     Description: {cm:CompHangarSkinCarousel};                     Flags: exclusive
 Name: "minimap";                   Description: {cm:CompMinimap};            Types: full custom; Flags: fixed
-Name: "minimap\hd";                Description: {cm:CompMinimapHD};          Types: full
+Name: "minimap\hd";                Description: {cm:CompMinimapHD};          Types: full;                          ExtraDiskSpaceRequired: 25064311
 Name: "minimap\tanksview";         Description: {cm:CompMinimapTanksView};   Types: full
 
 [Files]
 Source: "res\files.ini"; DestDir: "{tmp}"
+Source: "res\7za.exe"; DestDir: "{tmp}"
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: xvm
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\clock
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\vtechtree
@@ -115,7 +119,6 @@ Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createal
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\skins\desert
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\skins\livesky
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: hangar\skins\carousel
-Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: minimap\hd
 Source: "data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: minimap\tanksview
 
 [Code]

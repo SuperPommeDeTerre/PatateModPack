@@ -1,6 +1,6 @@
 var
 	gIniFile: String;
-
+	gZzipExe: String;
 
 function Count(What, Where: String): Integer;
 begin
@@ -40,7 +40,9 @@ end;
 procedure InitializeWizard();
 begin
 	ExtractTemporaryFile('files.ini');
+	ExtractTemporaryFile('7za.exe');
 	gIniFile := ExpandConstant('{tmp}\files.ini');
+	gZzipExe := ExpandConstant('{tmp}\7za.exe');
 	idpDownloadAfter(wpReady);
 end;
 
@@ -48,9 +50,12 @@ procedure CurPageChanged(CurPageID: Integer);
 var
 	lSelectedComponents: TArrayOfString;
 	i: Integer;
+	ResultCode: Integer;
+	OldState: Boolean;
 begin
 	if CurPageID = wpReady then
 	begin
+		{ Ajout en queue de téléchargement des composants sélectionnés }
 		// User can navigate to 'Ready to install' page several times, so we 
 		// need to clear file list to ensure that only needed files are added.
 		idpClearFiles;
@@ -59,16 +64,33 @@ begin
 		for i := 0 to GetArrayLength(lSelectedComponents) - 1 do
 			if IniKeyExists('DownloadedFiles', lSelectedComponents[i], gIniFile) then
 			begin
-				{Log(lSelectedComponents[i]);
-				Log(GetIniString('DownloadedFiles', lSelectedComponents[i], '', gIniFile));
-				Log(ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)));}
+				Log('Downloading file [' + GetIniString('DownloadedFiles', lSelectedComponents[i], '', gIniFile) + '] to [' + ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)) + ']...');
 				idpAddFile(GetIniString('DownloadedFiles', lSelectedComponents[i], '', gIniFile), ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)));
 			end;
 	end
-	else if CurPageID = then
+	else if CurPageID = wpInstalling then
 	begin
+		if IsWin64 then
+		begin
+			// Turn off redirection, so that cmd.exe from the 64-bit System
+			// directory is launched.
+			OldState := EnableFsRedirection(False);
+		end;
 		{ Uncompress files }
-		// TODO
+		Explode(lSelectedComponents, WizardSelectedComponents(false), ',');
+		for i := 0 to GetArrayLength(lSelectedComponents) - 1 do
+			if IniKeyExists('DownloadedFiles', lSelectedComponents[i], gIniFile) then
+			begin
+				Log('Extracting file [' + ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)) + '] to [' + ExpandConstant('{app}') + ']...');
+				Log('7-zip: ' + gZzipExe);
+				Log('args: x -o"' + ExpandConstant('{app}') + '" "' + ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)) + '"');
+				Exec(gZzipExe, 'x -o"' + ExpandConstant('{app}') + '" "' + ExpandConstant(GetIniString('DestFiles', lSelectedComponents[i], '', gIniFile)) + '"', ExpandConstant('{tmp}'), SW_HIDE, ewNoWait, ResultCode);
+			end;
+		if IsWin64 then
+		begin
+			// Restore the previous redirection state.
+			EnableFsRedirection(OldState);
+		end;
 	end;
 end;
 
